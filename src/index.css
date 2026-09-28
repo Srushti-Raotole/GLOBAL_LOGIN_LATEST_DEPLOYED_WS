@@ -1,0 +1,464 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 212 28% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 212 28% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 212 28% 20%;
+
+    --primary: 212 35% 31%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 21 85% 54%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 11% 93%;
+    --muted-foreground: 212 28% 45%;
+
+    --accent: 21 85% 54%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 21 85% 54%;
+    --warning-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 210 16% 88%;
+    --input: 210 16% 93%;
+    --ring: 212 35% 31%;
+    --radius: 0.5rem;
+
+    /* Topology colors */
+    --topology-bg: 210 20% 98%;
+    --topology-grid: 210 16% 92%;
+    --topology-node-source: 160 84% 39%;
+    --topology-node-dest: 212 92% 45%;
+    --topology-node-equipment: 280 68% 55%;
+    --topology-link-working: 160 84% 39%;
+    --topology-link-protection: 212 92% 45%;
+    --topology-link-fault: 0 84% 60%;
+    --topology-highlight: 45 93% 58%;
+
+    /* Sidebar */
+    --sidebar-background: 216 71% 8%;
+    --sidebar-foreground: 210 11% 85%;
+    --sidebar-primary: 21 85% 54%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 212 28% 15%;
+    --sidebar-accent-foreground: 210 11% 85%;
+    --sidebar-border: 212 28% 20%;
+    --sidebar-ring: 21 85% 54%;
+
+    /* Chart palette */
+    --chart-1: 212 72% 50%;
+    --chart-2: 142 76% 36%;
+    --chart-3: 21 85% 54%;
+    --chart-4: 280 65% 55%;
+    --chart-5: 48 96% 48%;
+    --chart-6: 340 75% 55%;
+    --chart-7: 190 80% 42%;
+
+    /* Vendor colors */
+    --vendor-google: 142 76% 36%;
+    --vendor-microsoft: 212 92% 45%;
+    --vendor-aws: 21 85% 54%;
+  }
+
+  .dark {
+    --background: 212 35% 10%;
+    --foreground: 210 11% 90%;
+
+    --card: 212 35% 13%;
+    --card-foreground: 210 11% 90%;
+
+    --popover: 212 35% 13%;
+    --popover-foreground: 210 11% 90%;
+
+    --primary: 212 45% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 21 85% 54%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 212 28% 20%;
+    --muted-foreground: 210 11% 65%;
+
+    --accent: 21 85% 54%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 21 85% 54%;
+    --warning-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 212 28% 22%;
+    --input: 212 28% 18%;
+    --ring: 212 45% 50%;
+
+    /* Topology dark */
+    --topology-bg: 212 35% 8%;
+    --topology-grid: 212 28% 16%;
+    --topology-node-source: 160 84% 45%;
+    --topology-node-dest: 212 92% 55%;
+    --topology-node-equipment: 280 68% 60%;
+    --topology-link-working: 160 84% 45%;
+    --topology-link-protection: 212 92% 55%;
+    --topology-link-fault: 0 84% 55%;
+    --topology-highlight: 45 93% 65%;
+
+    /* Chart palette dark */
+    --chart-1: 212 80% 60%;
+    --chart-2: 142 70% 50%;
+    --chart-3: 21 90% 60%;
+    --chart-4: 280 70% 65%;
+    --chart-5: 48 96% 58%;
+    --chart-6: 340 80% 62%;
+    --chart-7: 190 85% 52%;
+
+    /* Sidebar dark */
+    --sidebar-background: 216 71% 6%;
+    --sidebar-foreground: 210 11% 85%;
+    --sidebar-primary: 21 85% 54%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 212 28% 12%;
+    --sidebar-accent-foreground: 210 11% 85%;
+    --sidebar-border: 212 28% 18%;
+    --sidebar-ring: 21 85% 54%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Lock NOC portal to viewport; disable page scroll (tables can scroll internally) */
+  .noc-no-scroll {
+    overflow: hidden;
+  }
+
+  /* Global Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 4px;
+    border: 2px solid hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.6);
+  }
+
+  /* Portal layout full height */
+  .portal-layout-full {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .portal-content-full {
+    height: calc(100vh - 64px);
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Date input styling for both modes */
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0.4);
+  }
+
+  .dark input[type="date"]::-webkit-calendar-picker-indicator,
+  .dark input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.8);
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary) / 0.3) hsl(var(--background));
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+    border-radius: 5px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.3);
+    border-radius: 5px;
+    border: 2px solid hsl(var(--background));
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-corner {
+    background: hsl(var(--background));
+  }
+
+  /* Topology animations */
+  @keyframes topology-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  @keyframes topology-flow {
+    0% { stroke-dashoffset: 24; }
+    100% { stroke-dashoffset: 0; }
+  }
+
+  @keyframes node-highlight {
+    0%, 100% { box-shadow: 0 0 0 0 hsl(var(--topology-highlight) / 0.4); }
+    50% { box-shadow: 0 0 0 8px hsl(var(--topology-highlight) / 0); }
+  }
+
+  @keyframes data-flow {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(400%); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 2px hsl(var(--topology-node-source) / 0.5));
+    }
+    50% {
+      filter: drop-shadow(0 0 8px hsl(var(--topology-node-source) / 0.8));
+    }
+  }
+
+  @keyframes scale-in {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .animate-topology-pulse {
+    animation: topology-pulse 2s ease-in-out infinite;
+  }
+  .animate-topology-flow {
+    animation: topology-flow 1s linear infinite;
+  }
+  .animate-node-highlight {
+    animation: node-highlight 1.5s ease-in-out infinite;
+  }
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+  .animate-scale-in {
+    animation: scale-in 0.2s ease-out;
+  }
+}
+
+@layer components {
+  .topology-canvas {
+    @apply bg-card rounded-xl border border-border overflow-hidden relative;
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--topology-grid)) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  .topology-canvas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, hsl(var(--background)) 70%);
+    pointer-events: none;
+  }
+
+  .topology-node {
+    @apply rounded-lg border-2 bg-card shadow-lg transition-all duration-200;
+  }
+
+  .topology-node:hover {
+    @apply shadow-xl scale-105;
+  }
+
+  .topology-node-source {
+    border-color: hsl(var(--topology-node-source));
+  }
+
+  .topology-node-dest {
+    border-color: hsl(var(--topology-node-dest));
+  }
+
+  .topology-node-equipment {
+    border-color: hsl(var(--topology-node-equipment));
+    @apply bg-card/95;
+  }
+
+  .equipment-card {
+    @apply bg-card border border-border rounded-lg p-3 shadow-sm;
+  }
+
+  .equipment-port {
+    @apply text-xs font-mono px-2 py-1 rounded bg-muted text-muted-foreground;
+  }
+
+  .topology-link-working {
+    stroke: hsl(var(--topology-link-working));
+    stroke-width: 3;
+    fill: none;
+    filter: drop-shadow(0 0 3px hsl(var(--topology-link-working) / 0.4));
+  }
+
+  .topology-link-working:hover {
+    stroke-width: 5;
+    filter: drop-shadow(0 0 8px hsl(var(--topology-link-working) / 0.6));
+  }
+
+  .topology-link-protection {
+    stroke: hsl(var(--topology-link-protection));
+    stroke-width: 3;
+    stroke-dasharray: 8 4;
+    fill: none;
+    filter: drop-shadow(0 0 3px hsl(var(--topology-link-protection) / 0.4));
+  }
+
+  .topology-link-protection:hover {
+    stroke-width: 5;
+    filter: drop-shadow(0 0 8px hsl(var(--topology-link-protection) / 0.6));
+  }
+
+  .topology-link-fault {
+    stroke: hsl(var(--topology-link-fault));
+    stroke-width: 4;
+    fill: none;
+    filter: drop-shadow(0 0 6px hsl(var(--topology-link-fault) / 0.6));
+  }
+
+  .glass-panel {
+    @apply bg-card/80 backdrop-blur-md border border-border/50 shadow-xl;
+  }
+
+  .hover-card-3d {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+  }
+
+  .hover-card-3d:hover {
+    transform: translateY(-4px) rotateX(2deg);
+    box-shadow:
+      0 10px 40px -10px hsl(var(--primary) / 0.2),
+      0 20px 60px -20px hsl(var(--primary) / 0.1);
+  }
+
+  /* Vendor tab helpers */
+  .vendor-tab-google {
+    @apply border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:text-green-600 dark:data-[state=active]:text-green-400;
+  }
+
+  .vendor-tab-microsoft {
+    @apply border-b-2 border-transparent data-[state=active]:border-blue-500 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400;
+  }
+
+  .vendor-tab-aws {
+    @apply border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 dark:data-[state=active]:text-orange-400;
+  }
+
+  /* Table styling consistency */
+  .data-table {
+    @apply w-full border-collapse;
+  }
+
+  .data-table th {
+    @apply bg-muted/50 text-foreground font-semibold text-sm px-4 py-3 text-left border-b;
+  }
+
+  .data-table td {
+    @apply px-4 py-3 text-sm border-b border-border/50;
+  }
+
+  .data-table tr:hover {
+    @apply bg-muted/30;
+  }
+
+  /* Status badges */
+  .status-active {
+    @apply px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-700 dark:text-green-400;
+  }
+
+  .status-inactive {
+    @apply px-2 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground;
+  }
+
+  .status-warning {
+    @apply px-2 py-1 rounded-full text-xs font-medium bg-amber-500/20 text-amber-700 dark:text-amber-400;
+  }
+
+  .status-critical {
+    @apply px-2 py-1 rounded-full text-xs font-medium bg-red-500/20 text-red-700 dark:text-red-400;
+  }
+
+  /* Card styling */
+  .page-card {
+    @apply bg-card border border-border rounded-lg shadow-sm;
+  }
+
+  .page-card-header {
+    @apply px-4 py-3 border-b border-border bg-muted/30 rounded-t-lg;
+  }
+
+  .page-card-content {
+    @apply p-4;
+  }
+
+  /* Hide browser scrollbar on main layout */
+  .noc-layout {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .noc-layout::-webkit-scrollbar {
+    display: none;
+  }
+}
